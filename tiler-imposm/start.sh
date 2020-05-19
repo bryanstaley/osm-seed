@@ -23,6 +23,8 @@ echo "}" >> config.json
 function getData () {
     # Import from pubic url, ussualy it come from osm
     if [ $TILER_IMPORT_FROM == "osm" ]; then 
+       
+        echo "GETTING $TILER_IMPORT_PBF_URL" 
         wget $TILER_IMPORT_PBF_URL -O $PBFFile
     fi
 

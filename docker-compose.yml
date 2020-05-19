@@ -136,6 +136,10 @@ services:
       - tiler-db
     env_file: 
       - ./.env-tiler
+    environment:
+     - TILER_IMPORT_FROM=osm
+     - TILER_IMPORT_PBF_URL=http://download.geofabrik.de/north-america/us/hawaii-latest.osm.pbf
+
     command: >
       /bin/bash -c "
       echo Sleep for a while!;
@@ -154,12 +158,6 @@ services:
       - tiler-imposm
     ports:
       - "9090:9090"
-    command: >
-      /bin/bash -c "
-      echo Sleep for a while!;
-      sleep 100;
-      echo Starting tiles server!;
-      ./start.sh"
     env_file:
       - ./.env-tiler
   tiler-visor:

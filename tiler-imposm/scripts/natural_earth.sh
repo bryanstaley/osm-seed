@@ -143,11 +143,14 @@ for i in "${!dataurls[@]}"; do
 	url=${dataurls[$i]}
 
 	echo "fetching $url";
-	curl $url > $i.zip;
-	unzip $i -d $i
+	wget $url
+        fname=`basename $url`
+        fname_noext="${fname%.*}"
+
+	unzip $fname -d $fname_noext
 
 	# support for archives with more than one shapefile
-	for f in $i/*.shp; do
+	for f in $fname_noext/*.shp; do
 		# reproject data to webmercator (3857) and insert into our database
 		OGR_ENABLE_PARTIAL_REPROJECTION=true ogr2ogr -unsetFieldWidth -t_srs EPSG:3857 -nlt PROMOTE_TO_MULTI -f PostgreSQL PG:"dbname='$DB_NAME' host='$DB_HOST' port='$DB_PORT' user='$DB_USER' password='$DB_PW'" $f
 	done
