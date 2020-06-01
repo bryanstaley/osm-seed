@@ -1,5 +1,7 @@
 [webserver]
 port = ":${TILER_SERVER_PORT}"
+	[webserver.headers]
+	Access-Control-Allow-Origin = "*"
 
 # Tegola offers three tile caching strategies: "file", "redis", and "s3"
 [cache]
