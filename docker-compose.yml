@@ -122,7 +122,7 @@ services:
     ports:
       -  "5433:5432"
     volumes:
-      - ./postgres-gis-data:/var/lib/postgresql/data
+      - /opt/mini/postgres-gis-data:/var/lib/postgresql/data
     env_file:
       - ./.env-tiler
   tiler-imposm:
@@ -131,7 +131,7 @@ services:
       context: ./tiler-imposm
       dockerfile: Dockerfile
     volumes:
-      - ./tiler-imposm-data:/mnt/data
+      - /opt/mini/tiler-imposm-data:/mnt/data
     depends_on:
       - tiler-db
     env_file: 
@@ -152,7 +152,7 @@ services:
       context: ./tiler-server
       dockerfile: Dockerfile
     volumes:
-      - ./tiler-server-data:/mnt/data
+      - /opt/mini/tiler-server-data:/mnt/data
     depends_on:
       - tiler-db
       - tiler-imposm
