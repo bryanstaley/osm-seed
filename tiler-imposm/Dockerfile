@@ -1,7 +1,14 @@
-FROM ubuntu:14.04
+FROM ubuntu:18.04
 ENV GOPATH /usr/bin
+ENV DEBIAN_FRONTEND=noninteractive
 RUN apt-get -y update
+
+#   python-pip \
+#   python-software-properties
+#    libjson0-dev \
+
 RUN apt-get install -y \
+    python3 \
     build-essential \
     g++ \
     git-core \
@@ -19,20 +26,17 @@ RUN apt-get install -y \
     libgeos-dev \
     libprotobuf-dev \
     libgeos++-dev \
-    libjson0-dev \
     curl \
     wget \
     unzip \
     postgresql \
     postgresql-contrib \
-    python-pip \
-    software-properties-common \
-    python-software-properties 
+    software-properties-common
 
 # Install awscli  and gsutil  to get the pbf file
-RUN pip install awscli
-RUN curl -sSL https://sdk.cloud.google.com | bash
-RUN ln -f -s /root/google-cloud-sdk/bin/gsutil /usr/bin/gsutil
+#RUN pip install awscli
+#RUN curl -sSL https://sdk.cloud.google.com | bash
+#RUN ln -f -s /root/google-cloud-sdk/bin/gsutil /usr/bin/gsutil
 
 # Gdal is required to process the natural earth files
 RUN add-apt-repository ppa:ubuntugis/ppa
